@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Assessment 2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var bank = 5000;
+        $(document).ready(function () {
+            $('#bank').html(bank);
+        })
+
+        function getRoll() {
+            var diceOne = Math.floor(Math.random() * 6) + 1;
+            var diceTwo = Math.floor(Math.random() * 6) + 1;
+            return diceOne + diceTwo;
+        }
+
+        function betLow() {
+            var pastNumbers = $('#pastNumbers').html();
+            var bet = $('#userInput').val();
+            bet -= 0;
+            var tempHTML;
+
+            var roll = getRoll();
+            if (roll < 7) {
+                bank += bet;
+                tempHTML = '<div style="color: green">' + roll + ' - ' + bet + '</div>';
+
+            } else {
+                bank -= bet;
+                tempHTML = '<div style="color: red">' + roll + ' - ' + bet + '</div>';
+            }
+
+            pastNumbers = pastNumbers.concat(tempHTML);
+            $('#pastNumbers').html(pastNumbers);
+            $('#bank').html(bank);
+        }
+
+        function betHigh() {
+            var pastNumbers = $('#pastNumbers').html();
+            var bet = $('#userInput').val();
+            bet -= 0;
+            var tempHTML;
+
+            var roll = getRoll();
+            if (roll > 7) {
+                bank += bet;
+                tempHTML = '<div style="color: green">' + roll + ' - ' + bet + '</div>';
+
+            } else {
+                bank -= bet;
+                tempHTML = '<div style="color: red">' + roll + ' - ' + bet + '</div>';
+            }
+
+            pastNumbers = pastNumbers.concat(tempHTML);
+            $('#pastNumbers').html(pastNumbers);
+            $('#bank').html(bank);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="bank"></div>
+    <input id="userInput">
+    <button onclick="betLow()">Bet Low</button>
+    <button onclick="betHigh()">Bet High</button>
+    <div id="pastNumbers"></div>
+
+</body>
+
+</html>
